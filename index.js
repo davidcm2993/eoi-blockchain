@@ -67,6 +67,34 @@ app.get('/dashboard', (request, response) => {
     response.render('dashboard')
 })
 
+app.get('/cards', (request, response) => {
+    response.render(
+        'cards',
+        {cards: [
+            {
+             id: 1,
+             name: 'miau',
+             description: 'Un descripcion',
+             price: 0.012,
+             avatar: ''
+            },
+            {
+             id: 2,
+             name: 'Pepe',
+             description: 'Description 2',
+             price: 0.13,
+             avatar: ''
+            },
+            {
+             id: 3,
+             name: 'Senior X',
+             description: 'Description 3',
+             price: 0.13,
+             avatar: ''
+            }
+        ]}
+    )
+})
 
 app.get('/contacto', function(request, response) {
     response.render('contact')
