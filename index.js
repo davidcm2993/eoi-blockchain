@@ -41,7 +41,11 @@ app.post('/login', (request, response) => {
     } else {
         response.render(
             'login',
-            {message: 'Usuario o password incorrecto'})
+            {
+                message: 'Usuario o password incorrecto',
+                message_error: true
+            }
+        )
     }
 })
 
@@ -58,7 +62,10 @@ app.post('/contacto', function(request, response) {
     console.log(request.body.email)
     console.log(request.body.message)
     // TODO Enviar mail con sendgrid
-    response.send('Enviado')
+    response.render(
+        'contact',
+        {message: 'Mensaje enviado!', message_error: false}
+    )
 })
 
 app.get('/users/:user', function(request, response) {
