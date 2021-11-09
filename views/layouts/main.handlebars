@@ -11,9 +11,10 @@
     <title>Mi primera web</title>
   </head>
   <body>
-    <h1>Hello, world!</h1>
     {{# if message }}
-        <p>{{ message }}</p>
+        <div class="alert alert-danger" role="alert">
+            {{ message }}
+        </div>
     {{/if}}
 
     {{{body}}}
