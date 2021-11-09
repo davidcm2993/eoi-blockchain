@@ -36,12 +36,11 @@ app.post('/login', (request, response) => {
     const password = request.body.password
 
     if (isAuthenticated(user, password)) {
-        // TODO Implement dashboard
         response.redirect('/dashboard')
     } else {
-        // TODO Mostrar un mensaje en el login en el login.handlebars
-        // TODO Meter un estilo tipo Bootstrap
-        response.send('ERROR!')
+        response.render(
+            'login',
+            {message: 'Usuario o password incorrecto'})
     }
 })
 
