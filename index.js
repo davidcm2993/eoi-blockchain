@@ -28,6 +28,13 @@ app.get('/', function(request, response) {
 // 1. decirme que estoy autenticado "EXITO!"
 // 2. redireccione a una pagina interna /dashboard
 // 3. si el user password no es admin admin, mostrar "ERROR!"
+
+
+// Nueva pagina /about, en el menu salga About (/about)
+// Dentro de esa pagina, un titulo (h1), un parrafo, un input para suscribirme
+// a una newsletter
+// Cuando meta mi email y le de al boton de suscribir, me sale un mensaje de exito
+// en esa pagina de "suscrito correctamente"
 app.get('/login', (request, response) => {
     response.render('login')
 })
@@ -59,8 +66,6 @@ app.get('/contacto', function(request, response) {
 })
 
 app.post('/contacto', function(request, response) {
-    console.log(request.body.email)
-    console.log(request.body.message)
     // TODO Enviar mail con sendgrid
     response.render(
         'contact',

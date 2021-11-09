@@ -76,7 +76,10 @@
 
     <div class="container">
       {{#if message}}
-        <div class="alert {{#if message_error}} alert-danger {{else}} alert-success {{/if}}"
+        <div class="alert
+              {{#if message_error}} alert-danger
+              {{else}} alert-success
+              {{/if}}"
              role="alert">
           {{message}}
         </div>
