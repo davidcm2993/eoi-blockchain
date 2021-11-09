@@ -30,11 +30,6 @@ app.get('/', function(request, response) {
 // 3. si el user password no es admin admin, mostrar "ERROR!"
 
 
-// Nueva pagina /about, en el menu salga About (/about)
-// Dentro de esa pagina, un titulo (h1), un parrafo, un input para suscribirme
-// a una newsletter
-// Cuando meta mi email y le de al boton de suscribir, me sale un mensaje de exito
-// en esa pagina de "suscrito correctamente"
 app.get('/login', (request, response) => {
     response.render('login')
 })
@@ -54,6 +49,18 @@ app.post('/login', (request, response) => {
             }
         )
     }
+})
+// Nueva pagina /about, en el menu salga About (/about)
+// Dentro de esa pagina, un titulo (h1), un parrafo, un input para suscribirme
+// a una newsletter
+// Cuando meta mi email y le de al boton de suscribir, me sale un mensaje de exito
+// en esa pagina de "suscrito correctamente"
+app.get('/about', (request, response) => {
+    response.render('about')
+})
+
+app.post('/about', (request, response) => {
+    response.render('about', {message: 'Te has suscrito!', message_error: false})
 })
 
 app.get('/dashboard', (request, response) => {
