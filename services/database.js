@@ -1,7 +1,7 @@
 const fs = require('fs')
 
 class DatabaseService {
-    DB_FILE_PATH = __dirname + '../.db'
+    DB_FILE_PATH = __dirname + '/../.db'
 
     constructor() {}
 
@@ -16,10 +16,21 @@ class DatabaseService {
     }
 
     // Guarda los datos en la clave key
-    store(key, data) {}
+    store(key, data) {
+        const dbData = JSON.parse(fs.readFileSync(this.DB_FILE_PATH))
+        let newData = { ...dbData}
+
+        newData[key] = { ...data}
+        JSON.stringify(newData)
+
+        return fs.writeFileSync(this.DB_FILE_PATH, newData)
+    }
 
     // Toma los datos basado en esta clave
-    get(key) {}
+    get(key) {
+        const dbData = JSON.parse(fs.readFileSync(this.DB_FILE_PATH))
+        return dbData[key]
+    }
 }
 
 module.exports = {

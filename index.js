@@ -2,6 +2,7 @@ const express = require('express')
 const exphbs = require('express-handlebars')
 
 const { Card, CardRepository } = require('./models/card')
+const { DatabaseService } = require('./services/database')
 
 const app = express()
 const hbs = exphbs()
@@ -13,6 +14,12 @@ app.use(express.static(__dirname + '/public'));
 app.engine('handlebars', hbs)
 app.set('view engine', 'handlebars')
 const port = process.env.PORT || 3000
+
+const db = new DatabaseService()
+
+if(!db.exists()) {
+    db.init()
+}
 
 function isAuthenticated(user, password) {
     // TODO Comprobar en base de datos el usuario
