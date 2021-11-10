@@ -20,11 +20,17 @@ class DatabaseService {
         const dbData = JSON.parse(fs.readFileSync(this.DB_FILE_PATH))
         let newData = { ...dbData}
 
-        newData[key] = { ...data}
-        JSON.stringify(newData)
+        newData[key] = data
+        const jsonData = JSON.stringify(newData)
 
-        return fs.writeFileSync(this.DB_FILE_PATH, newData)
+        fs.writeFileSync(this.DB_FILE_PATH, jsonData)
+
+        return newData
     }
+
+    // TODO storeOne(key, instance)
+    // Dado una clave ("cards") y un objeto, guarda el objeto en la lista
+    // ("cards")
 
     // Toma los datos basado en esta clave
     get(key) {

@@ -1,7 +1,7 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
 
-const { Card, CardRepository } = require('./models/card')
+const { CardRepository } = require('./models/card')
 const { DatabaseService } = require('./services/database')
 
 const app = express()

@@ -1,4 +1,3 @@
-const { AvatarService } = require('../services/avatar')
 const { DatabaseService } = require('../services/database')
 
 class CardRepository {
