@@ -88,7 +88,6 @@ app.get('/cards', (request, response) => {
 
 app.post('/cards', (request, response) => {
     const cardName = request.body.name
-    console.log(cardName)
 
     const newCard = new Card(cardName)
 
