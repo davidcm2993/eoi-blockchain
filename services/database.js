@@ -1,7 +1,7 @@
 const fs = require('fs')
 
 class DatabaseService {
-    DB_FILE_PATH = __dirname + '/../.db'
+    DB_FILE_PATH = __dirname + '/../.db.json'
 
     constructor() {}
 

@@ -1,2 +1,4 @@
+# Ignoring typical node modules folder
 node_modules/
-.db
+# Ignoring Database file
+.db.json
