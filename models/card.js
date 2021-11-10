@@ -1,4 +1,7 @@
+const { v4: uuidv4 } = require('uuid')
+
 const { DatabaseService } = require('../services/database')
+const { AvatarService } = require('../services/avatar')
 
 class CardRepository {
     constructor() {}
@@ -11,8 +14,12 @@ class CardRepository {
 
 
 class Card {
-    constructor() {
-        console.log('Cargando Card')
+    constructor(cardName) {
+        this.id = uuidv4()
+        this.name = cardName
+        this.price = 0.12
+        this.description = "Description"
+        this.avatar = new AvatarService().getAvatarFromName(this.id)
     }
 }
 

@@ -1,7 +1,7 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
 
-const { CardRepository } = require('./models/card')
+const { CardRepository, Card } = require('./models/card')
 const { DatabaseService } = require('./services/database')
 
 const app = express()
@@ -84,6 +84,18 @@ app.get('/cards', (request, response) => {
         'cards',
         {cards: new CardRepository().getCards()}
     )
+})
+
+app.post('/cards', (request, response) => {
+    const cardName = request.body.name
+    console.log(cardName)
+
+    const newCard = new Card(cardName)
+
+    const database = new DatabaseService()
+    database.storeOne('cards', newCard)
+
+    response.render('cards')
 })
 
 app.get('/contacto', function(request, response) {
