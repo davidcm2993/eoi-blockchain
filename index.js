@@ -19,7 +19,6 @@ function isAuthenticated(user, password) {
     return user == 'admin' && password == 'admin'
 }
 
-// https://avatars.dicebear.com/api/human/loquesea.svg
 
 // Las vistas de mi web
 // GET PUT POST DELETE - API
