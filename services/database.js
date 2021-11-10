@@ -22,7 +22,7 @@ class DatabaseService {
         const dbData = JSON.parse(fs.readFileSync(this.DB_FILE_PATH))
         let newData = { ...dbData}
 
-        if (key in newData) {
+        if (!(key in newData)) {
             newData[key] = [instance]
         } else {
             newData[key].push(instance)
