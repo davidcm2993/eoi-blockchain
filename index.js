@@ -90,13 +90,15 @@ app.post('/cards', (request, response) => {
     const cardName = request.body.name
     const description = request.body.description
     const price = request.body.price
+    // TODO Comprobar si es vacio y si es asi
+    // mostrar un error
 
     const newCard = new Card(
         cardName, description, price)
 
     db.storeOne('cards', newCard)
 
-    response.render('cards')
+    response.redirect('/cards')
 })
 
 app.get('/contacto', function(request, response) {
