@@ -14,11 +14,11 @@ class CardRepository {
 
 
 class Card {
-    constructor(cardName) {
+    constructor(cardName, description, price) {
         this.id = uuidv4()
         this.name = cardName
-        this.price = 0.12
-        this.description = "Description"
+        this.description = description
+        this.price = price
         this.avatar = new AvatarService().getAvatarFromName(this.id)
     }
 }

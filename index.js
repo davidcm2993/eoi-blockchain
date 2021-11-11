@@ -88,11 +88,13 @@ app.get('/cards', (request, response) => {
 
 app.post('/cards', (request, response) => {
     const cardName = request.body.name
+    const description = request.body.description
+    const price = request.body.price
 
-    const newCard = new Card(cardName)
+    const newCard = new Card(
+        cardName, description, price)
 
-    const database = new DatabaseService()
-    database.storeOne('cards', newCard)
+    db.storeOne('cards', newCard)
 
     response.render('cards')
 })
