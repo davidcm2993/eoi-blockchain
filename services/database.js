@@ -49,6 +49,11 @@ class DatabaseService {
         const dbData = JSON.parse(fs.readFileSync(this.DB_FILE_PATH))
         return dbData[key]
     }
+
+    // TODO Eliminar un objeto??? removeOne('cards')
+    removeOne(key, instanceId) {
+        // TODO
+    }
 }
 
 module.exports = {

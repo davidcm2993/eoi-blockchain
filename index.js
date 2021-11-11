@@ -86,6 +86,13 @@ app.get('/cards', (request, response) => {
     )
 })
 
+app.get('/cards/:id', (request, response) => {
+    const card = db.findOne(
+        'cards',
+        request.params.id)
+    response.render('card', {'card': card})
+})
+
 app.post('/cards', (request, response) => {
     const cardName = request.body.name
     const description = request.body.description
@@ -98,6 +105,11 @@ app.post('/cards', (request, response) => {
 
     db.storeOne('cards', newCard)
 
+    response.redirect('/cards')
+})
+
+app.get('/delete_card/:id', (request, response) => {
+    db.removeOne('cards', request.params.id)
     response.redirect('/cards')
 })
 
