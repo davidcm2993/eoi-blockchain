@@ -90,7 +90,7 @@ app.get('/cards/:id', (request, response) => {
     const card = db.findOne(
         'cards',
         request.params.id)
-    response.render('card', {'card': card})
+    response.render('card', {card: card})
 })
 
 app.post('/cards', (request, response) => {
