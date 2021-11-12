@@ -1,7 +1,12 @@
-<img src="{{ card.avatar }}" />
+<div class="row">
+  <div class="col-md-12">
+    <img src="{{card.avatar}}" class="img-fluid" />
 
-<h1>Carta: {{ card.name }} #{{ card.id }}</h1>
+    <h1>Carta: {{card.name}} #{{card.id}}</h1>
 
-<p>{{ card.description }}</p>
+    <p>{{card.description}}</p>
 
-<p>{{ card.price }} ETH</p>
+    <p>{{card.price}} ETH</p>
+  </div>
+
+</div>
