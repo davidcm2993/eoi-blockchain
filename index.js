@@ -26,6 +26,10 @@ function isAuthenticated(user, password) {
     return user == 'admin' && password == 'admin'
 }
 
+function checkValidCardValues(cardName, description, price) {
+    return cardName && description && price
+}
+
 
 // Las vistas de mi web
 // GET PUT POST DELETE - API
@@ -105,6 +109,17 @@ app.post('/cards', (request, response) => {
     const price = request.body.price
     // TODO Comprobar si es vacio y si es asi
     // mostrar un error
+    if(!checkValidCardValues(cardName, description, price)) {
+        response.status(400).render(
+            'cards',
+            {
+                cards: new CardRepository().getCards(),
+                message: 'Necesitamos que rellenes todos los campos para crear la carta',
+                message_error: true
+            }
+        )
+        return
+    }
 
     const newCard = new Card(
         cardName, description, price)
