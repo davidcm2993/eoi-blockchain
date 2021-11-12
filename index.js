@@ -90,8 +90,12 @@ app.get('/cards/:id', (request, response) => {
     const card = db.findOne(
         'cards',
         request.params.id)
-    // TODO Devolver un error si card es vacio
-    // HTTP Error 404
+
+    if (!card) {
+        response.status(404).send()
+        return
+    }
+
     response.render('card', {card: card})
 })
 

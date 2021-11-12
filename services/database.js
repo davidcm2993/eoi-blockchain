@@ -28,7 +28,7 @@ class DatabaseService {
             newData[key].push(instance)
         }
 
-        fs.writeFileSync(this.DB_FILE_PATH, JSON.stringify(newData))
+        fs.writeFileSync(this.DB_FILE_PATH, JSON.stringify(newData, null, '\t'))
 
         return newData
     }
@@ -39,7 +39,7 @@ class DatabaseService {
         let newData = { ...dbData}
         newData[key] = data
 
-        fs.writeFileSync(this.DB_FILE_PATH, JSON.stringify(newData))
+        fs.writeFileSync(this.DB_FILE_PATH, JSON.stringify(newData, null, '\t'))
 
         return newData
     }
