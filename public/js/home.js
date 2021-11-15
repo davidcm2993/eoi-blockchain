@@ -7,7 +7,7 @@ const showDogImage = function(imageUrl) {
     $('#dog-img').append(image)
 }
 
-const showList = function(cryptoList, itemProperty, target) {
+const showList = function(cryptoList, target) {
     let cryptoHtmlList = $('<ul>').addClass('list-group')
     let listItem
 
@@ -16,7 +16,7 @@ const showList = function(cryptoList, itemProperty, target) {
             '<li>'
         ).addClass(
             'list-group-item'
-        ).text(item[itemProperty])
+        ).text(`${item.name} (${item.symbol}) price: $${Math.floor(item.priceUsd)} market: $${Math.floor(item.marketCapUsd)}`)
         cryptoHtmlList.append(listItem)
     }
 
@@ -30,15 +30,16 @@ $.getJSON(
 })
 
 $.getJSON(
-    'https://nova.bitcambio.com.br/api/v3/public/getassets',
-    function(data) {
-        showList(data.result, 'AssetLong', '#crypto-list')
-})
-
-$.getJSON(
     'https://api.coincap.io/v2/assets',
     function(data) {
-        console.log(data)
-        showList(data.data, 'id', '#realcrypto-list')
+        const currencies = data.data
+        // TODO
+        currencies.sort(
+            (currency1, currency2) => {
+                currency1.priceUsd > currency2.priceUsd
+            }
+        )
+        console.log(currencies)
+        showList(currencies, '#realcrypto-list')
     }
 )
