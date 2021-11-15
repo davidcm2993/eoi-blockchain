@@ -5,3 +5,8 @@
 .card {
     margin-top: 15px;
 }
+
+.card-detail-img {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
