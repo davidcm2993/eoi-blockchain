@@ -34,11 +34,19 @@ $('input[name="name"]').change(function() {
 // TODO AL hacer click en una carta quiero ver un console.log en la Consola
 // Posteriormente quiero ver el mensaje de success que diga "Has clicado la carta con id: XXXXXXXXXX"
 
-const showNotification = function(message) {
+const showNotification = function(message, isError = false) {
+
     let notification = $(
         '<div>'
     ).addClass('alert alert-success').prop('role', 'alert')
     notification.text(message)
+
+    if (isError) {
+        notification.removeClass(
+            'alert-success'
+        ).addClass('alert-danger')
+    }
+
     $(
         '#notifications'
     ).empty().append(notification)
