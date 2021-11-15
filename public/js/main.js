@@ -33,8 +33,19 @@ $('input[name="name"]').change(function() {
 
 // TODO AL hacer click en una carta quiero ver un console.log en la Consola
 // Posteriormente quiero ver el mensaje de success que diga "Has clicado la carta con id: XXXXXXXXXX"
+
+const showNotification = function(message) {
+    let notification = $(
+        '<div>'
+    ).addClass('alert alert-success').prop('role', 'alert')
+    notification.text(message)
+    $(
+        '#notifications'
+    ).empty().append(notification)
+}
+
 $('.card-item').click(function() {
     const cardId = $(this).data('card-id')
-    console.log(cardId)
-    console.log(`Has clicado el elemento con id: ${cardId}`)
+    const message = `Has clicado el elemento con id: ${cardId}`
+    showNotification(message)
 })
