@@ -21,14 +21,20 @@ $('#create-card-button').click(function() {
 
 $('input[name="name"]').change(function() {
     const nameValue = $(this).val()
+    const buttonTarget = $('#create-card-button')
 
     if (nameValue) {
-        $('#create-card-button').prop('disabled', false).addClass('btn-primary')
+        buttonTarget.prop('disabled', false)
     } else {
-        $('#create-card-button').prop('disabled', 'disabled').removeClass('btn-primary')
+        buttonTarget.prop('disabled', 'disabled')
     }
 })
 
 
 // TODO AL hacer click en una carta quiero ver un console.log en la Consola
 // Posteriormente quiero ver el mensaje de success que diga "Has clicado la carta con id: XXXXXXXXXX"
+$('.card-item').click(function() {
+    const cardId = $(this).data('card-id')
+    console.log(cardId)
+    console.log(`Has clicado el elemento con id: ${cardId}`)
+})
