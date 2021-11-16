@@ -179,21 +179,40 @@ app.post('/api/v1/cards', (request, response) => {
 
 // GET /api/v1/cards/:id   // Muestra una carta
 app.get('/api/v1/cards/:id', (request, response) => {
+    const card = db.findOne('cards', request.params.id)
 
+    if(!card) {
+        response.status(404).send(
+            {'error': 404, 'message': 'No existe el recurso 404'}
+        )
+        return
+    }
+
+    response.send(card)
 })
 
 // PUT /api/v1/cards/:id       // Editar un elemento
 app.put('/api/v1/cards/:id', (request, response) => {
+    let card = db.findOne('cards', request.params.id)
+
+    if(!card) {
+        response.status(404).send(
+            {'error': 404, 'message': 'No existe el recurso 404'}
+        )
+        return
+    }
 
 })
 
 // DELETE /api/v1/cards/:id    // Eliminar un elemento
 app.delete('/api/v1/cards/:id', (request, response) => {
 
-    if(!db.findOne('cards', request.params.id))
+    if(!db.findOne('cards', request.params.id)) {
         response.status(404).send(
             {'error': 404, 'message': 'No existe el recurso 404'}
         )
+        return
+    }
 
     db.removeOne('cards', request.params.id)
     response.status(204).send()
