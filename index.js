@@ -11,6 +11,7 @@ const hbs = exphbs()
 app.use(express.urlencoded({
     extended: true
 }))
+app.use(express.json());
 app.use(morgan('dev'))
 app.use(express.static(__dirname + '/public'));
 app.engine('handlebars', hbs)
@@ -28,8 +29,8 @@ function isAuthenticated(user, password) {
     return user == 'admin' && password == 'admin'
 }
 
-function checkValidCardValues(cardName, description, price) {
-    return cardName && description && price
+function checkValidCardValues(body) {
+    return body.name && body.description && body.price
 }
 
 
@@ -111,7 +112,7 @@ app.post('/cards', (request, response) => {
     const price = request.body.price
     // TODO Comprobar si es vacio y si es asi
     // mostrar un error
-    if(!checkValidCardValues(cardName, description, price)) {
+    if(!checkValidCardValues(request.body)) {
         response.status(400).render(
             'cards',
             {
@@ -157,7 +158,23 @@ app.get('/api/v1/cards', (request, response) => {
 
 // POST /api/v1/cards      // Crear una carta
 app.post('/api/v1/cards', (request, response) => {
+    if (!checkValidCardValues(request.body)) {
+        response.status(400).send(
+            {
+                'error': 400,
+                'message': 'No has rellenado todos los datos obligatorios: name, price, description'
+            }
+        )
+        return
+    }
 
+    const card = new Card(
+        request.body.name,
+        request.body.description,
+        request.body.price)
+    db.storeOne('cards', card)
+
+    response.status(201).send(card)
 })
 
 // GET /api/v1/cards/:id   // Muestra una carta
@@ -173,6 +190,13 @@ app.put('/api/v1/cards/:id', (request, response) => {
 // DELETE /api/v1/cards/:id    // Eliminar un elemento
 app.delete('/api/v1/cards/:id', (request, response) => {
 
+    if(!db.findOne('cards', request.params.id))
+        response.status(404).send(
+            {'error': 404, 'message': 'No existe el recurso 404'}
+        )
+
+    db.removeOne('cards', request.params.id)
+    response.status(204).send()
 })
 
 
