@@ -97,9 +97,19 @@ app.get('/dashboard', (request, response) => {
 })
 
 app.get('/cards', (request, response) => {
+    console.log(request.query.text)
+    const query = request.query.text
+    let cards
+
+    if(query) {
+        cards = db.search('cards', 'name', query)
+    } else {
+        cards = CardRepository.getCards()
+    }
+
     response.render(
         'cards',
-        {cards: CardRepository.getCards()}
+        {cards: cards}
     )
 })
 
