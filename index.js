@@ -166,6 +166,7 @@ app.post('/contacto', function(request, response) {
 // API para el recurso cards (GET POST PUT/PATCH DELETE)  API Rest JSON
 // GET /api/v1/cards  // Listar recurso (cards)
 app.get('/api/v1/cards', (request, response) => {
+    // TODO Dado un parametro query, poder filtrar los elementos
     const cards = CardRepository.getCards()
     response.send(cards)
 })
