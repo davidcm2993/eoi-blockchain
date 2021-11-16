@@ -71,14 +71,6 @@ app.post('/login', (request, response) => {
     }
 })
 
-app.post('/search', (request, response) => {
-    // Buscar en cards por nombre
-    cards = db.search('cards', 'name', request.body.query)
-
-    // Hacer un render con los cartas elegidas
-    response.render('cards', {cards: cards})
-})
-
 // Nueva pagina /about, en el menu salga About (/about)
 // Dentro de esa pagina, un titulo (h1), un parrafo, un input para suscribirme
 // a una newsletter
@@ -97,19 +89,21 @@ app.get('/dashboard', (request, response) => {
 })
 
 app.get('/cards', (request, response) => {
-    console.log(request.query.text)
     const query = request.query.text
     let cards
 
-    if(query) {
+    if (query) {
         cards = db.search('cards', 'name', query)
     } else {
-        cards = CardRepository.getCards()
+        cards = db.get('cards')
     }
 
     response.render(
         'cards',
-        {cards: cards}
+        {
+            cards: cards,
+            query: query
+        }
     )
 })
 
