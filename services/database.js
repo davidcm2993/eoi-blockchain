@@ -33,6 +33,14 @@ class DatabaseService {
         return newData
     }
 
+    updateOne(key, instance) {
+        let resourceList = this.get(key)
+        const itemToEditIndex = resourceList.findIndex(
+            item => item.id === instance.id)
+        resourceList[itemToEditIndex] = instance
+        this.store(key, resourceList)
+    }
+
     // Guarda los datos en la clave key
     store(key, data) {
         const dbData = JSON.parse(fs.readFileSync(this.DB_FILE_PATH))

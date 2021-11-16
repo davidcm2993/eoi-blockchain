@@ -1,6 +1,7 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
 const morgan = require('morgan')
+const _ = require('lodash')
 
 const { CardRepository, Card } = require('./models/card')
 const { DatabaseService } = require('./services/database')
@@ -193,15 +194,35 @@ app.get('/api/v1/cards/:id', (request, response) => {
 
 // PUT /api/v1/cards/:id       // Editar un elemento
 app.put('/api/v1/cards/:id', (request, response) => {
-    let card = db.findOne('cards', request.params.id)
+    const card = db.findOne('cards', request.params.id)
 
-    if(!card) {
+    if (!card) {
         response.status(404).send(
             {'error': 404, 'message': 'No existe el recurso 404'}
         )
         return
     }
 
+    // Solo se puede editar name, price, o description
+    // Si me llega uno de estos valores, dejo editar
+    // Si no me llega ninguno o me llega cualquier otro
+    // devuelvo un 400
+    const cardRequest = _.pick(request.body, ['name', 'price', 'description'])
+
+    if(_.isEmpty(cardRequest)) {
+        response.status(400).send(
+            {
+                'error': 400,
+                'message': 'No has rellenado alguno de los datos obligatorios: name, price, description'
+            }
+        )
+        return
+    }
+
+    const cardEdited = { ...card, ...cardRequest}
+    db.updateOne('cards', cardEdited)
+
+    response.send(cardEdited)
 })
 
 // DELETE /api/v1/cards/:id    // Eliminar un elemento
