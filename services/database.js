@@ -78,6 +78,12 @@ class DatabaseService {
         return elementList.find(item => item.id === instanceId)
     }
 
+    search(key, property, query) {
+        const resourceList = this.get(key)
+        return resourceList.filter(
+            resource => resource[property].toLowerCase().includes(query))
+    }
+
     // Toma los datos basado en esta clave
     get(key) {
         const dbData = JSON.parse(fs.readFileSync(this.DB_FILE_PATH))
