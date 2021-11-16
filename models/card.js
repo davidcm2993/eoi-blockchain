@@ -6,7 +6,7 @@ const { AvatarService } = require('../services/avatar')
 class CardRepository {
     constructor() {}
 
-    getCards() {
+    static getCards() {
         const database = new DatabaseService()
         return database.get('cards')
     }

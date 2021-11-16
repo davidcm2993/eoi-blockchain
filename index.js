@@ -88,7 +88,7 @@ app.get('/dashboard', (request, response) => {
 app.get('/cards', (request, response) => {
     response.render(
         'cards',
-        {cards: new CardRepository().getCards()}
+        {cards: CardRepository.getCards()}
     )
 })
 
@@ -115,7 +115,7 @@ app.post('/cards', (request, response) => {
         response.status(400).render(
             'cards',
             {
-                cards: new CardRepository().getCards(),
+                cards: CardRepository.getCards(),
                 message: 'Necesitamos que rellenes todos los campos para crear la carta',
                 message_error: true
             }
@@ -148,11 +148,33 @@ app.post('/contacto', function(request, response) {
     )
 })
 
-app.get('/users/:user', function(request, response) {
-    // TODO Hacer una consulta para traerme los datos
-    // de este usuario
-    response.send(`Usuario ${request.params.user}`)
+// API para el recurso cards (GET POST PUT/PATCH DELETE)  API Rest JSON
+// GET /api/v1/cards  // Listar recurso (cards)
+app.get('/api/v1/cards', (request, response) => {
+    const cards = CardRepository.getCards()
+    response.send(cards)
 })
+
+// POST /api/v1/cards      // Crear una carta
+app.post('/api/v1/cards', (request, response) => {
+
+})
+
+// GET /api/v1/cards/:id   // Muestra una carta
+app.get('/api/v1/cards/:id', (request, response) => {
+
+})
+
+// PUT /api/v1/cards/:id       // Editar un elemento
+app.put('/api/v1/cards/:id', (request, response) => {
+
+})
+
+// DELETE /api/v1/cards/:id    // Eliminar un elemento
+app.delete('/api/v1/cards/:id', (request, response) => {
+
+})
+
 
 app.listen(port, function() {
     console.log(`Servidor iniciado en ${port}`)
