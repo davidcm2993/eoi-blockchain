@@ -17,7 +17,8 @@
   },
   "scripts": {
     "test": "mocha",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "start": "node index.js"
   },
   "author": "Javier Aguirre <javi@wealize.digital>",
   "license": "ISC"
